@@ -1,4 +1,4 @@
-Project Overview: “Reserve Transit Backend”
+Project Overview: “Review Transit Backend”
 This is a shipment tracking and feedback management system built for both public users (customers) and admins (internal staff). Its main purpose is to let customers track packages in real time, submit feedback, and allow admins to manage shipments, track events, and handle users. It also includes full authentication and role-based access control.
 
 1. Users & Roles
