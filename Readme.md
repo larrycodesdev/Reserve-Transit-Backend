@@ -301,3 +301,31 @@ Scalable structure with services and handlers separated cleanly.
 
 In short:
 This project is essentially a modern, role-based shipment tracking and customer feedback system. Public users can track shipments and give feedback, while admins manage shipments, track events, and handle users and feedback—all securely, with JWT-based authentication and rate-limiting in place.
+
+
+
+<!-- File Structure -->
+/api
+   /public
+   /auth
+   /admin
+   /shipments
+   /feedback
+/config
+/classes
+    User.php
+    Shipment.php
+    TrackingEvent.php
+    Feedback.php
+    Auth.php
+    Helpers.php
+/logics
+    auth_login.php
+    auth_register.php
+    shipment_create.php
+    shipment_list.php
+    tracking_add_event.php
+    ...
+middleware
+    AuthMiddleware.php
+    RateLimit.php
