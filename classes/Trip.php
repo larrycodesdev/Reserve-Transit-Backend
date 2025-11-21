@@ -57,4 +57,28 @@
             $stmt = $this->db->prepare("DELETE FROM trips WHERE id = ?");
             return $stmt->execute([$id]);
         }
+
+        public function count() {
+            global $db;
+            $stmt = $db->query("SELECT COUNT(*) as total FROM trips");
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return (int)$row['total'];
+        }
+
+        public function today() {
+            global $db;
+            $today = date('Y-m-d');
+            $stmt = $db->prepare("SELECT * FROM trips WHERE DATE(departure_date) = ?");
+            $stmt->execute([$today]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function list($limit = 50, $offset = 0) {
+            global $db;
+            $stmt = $db->prepare("SELECT * FROM trips ORDER BY departure_date DESC LIMIT ? OFFSET ?");
+            $stmt->bindValue(1, (int)$limit, PDO::PARAM_INT);
+            $stmt->bindValue(2, (int)$offset, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
     }

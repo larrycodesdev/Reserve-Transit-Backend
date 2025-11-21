@@ -29,4 +29,24 @@
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
+
+        public function totalRevenue() {
+            global $db;
+            $stmt = $db->query("SELECT SUM(amount) as total FROM payments WHERE status = 'paid'");
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return (float)($row['total'] ?? 0);
+        }
+
+        public function overview() {
+            global $db;
+            $stmt = $db->query("
+                SELECT 
+                    COUNT(*) as total_transactions,
+                    SUM(amount) as total_amount,
+                    SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END) as received,
+                    SUM(CASE WHEN status != 'paid' THEN amount ELSE 0 END) as pending
+                FROM payments
+            ");
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
     }
