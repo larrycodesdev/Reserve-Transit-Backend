@@ -305,27 +305,52 @@ This project is essentially a modern, role-based shipment tracking and customer 
 
 
 <!-- File Structure -->
-/api
-   /public
-   /auth
-   /admin
-   /shipments
-   /feedback
-/config
-/classes
-    User.php
-    Shipment.php
-    TrackingEvent.php
-    Feedback.php
-    Auth.php
-    Helpers.php
-/logics
-    auth_login.php
-    auth_register.php
-    shipment_create.php
-    shipment_list.php
-    tracking_add_event.php
-    ...
-middleware
-    AuthMiddleware.php
-    RateLimit.php
+/project-root
+│
+├── config/
+│   └── db.php                 // PDO connection
+│
+├── classes/
+│   ├── AdminUser.php          // Admin CRUD + auth
+│   ├── Auth.php               // Login/Token handling
+│   ├── Branch.php             // Branch operations
+│   ├── Operations.php         // Daily operations logic
+│   ├── Trip.php               // Trips + scheduling
+│   ├── Booking.php            // Ticket bookings + payments
+│   ├── Finance.php            // Finance records
+│   └── Utils.php              // Shared tools (validation, random strings)
+│
+├── middlewares/
+│   ├── auth.php               // JWT/Session check
+│   └── super_admin.php        // Restrict sensitive operations
+│
+├── api/
+│   ├── admin/
+│   │   ├── list.php
+│   │   ├── create.php
+│   │   ├── update-role.php
+│   │   └── set-password.php
+│   │
+│   ├── branches/
+│   │   ├── list.php
+│   │   ├── create.php
+│   │   ├── update.php
+│   │   └── delete.php
+│   │
+│   ├── trips/
+│   │   ├── list.php
+│   │   ├── create.php
+│   │   ├── update.php
+│   │   └── delete.php
+│   │
+│   ├── bookings/
+│   │   ├── book.php
+│   │   ├── verify-payment.php
+│   │   └── list.php
+│   │
+│   └── dashboard/
+│       ├── stats.php
+│       ├── today.php
+│       └── finance.php
+│
+└── index.php                  // Router (optional)
